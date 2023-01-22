@@ -1,7 +1,7 @@
 import {Dimensions} from 'react-native';
 
 export const convertDate = (dateInSeconds: number) => {
-  var date = new Date(dateInSeconds * 1000).toLocaleDateString('en-US');
+  var date = new Date(dateInSeconds * 1000).toDateString();
   return date;
 };
 

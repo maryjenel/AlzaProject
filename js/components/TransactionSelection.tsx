@@ -2,6 +2,8 @@ import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import * as React from 'react';
 import {convertDate, convertDateToUnixSeconds} from '../utils/utils';
 import DatePicker from 'react-native-date-picker';
+import {FLEX_ROW} from '../theme/common';
+import {spacing} from '../theme/spacing';
 
 const TransactionSelection = ({
   dateInUnixSeconds,
@@ -41,8 +43,8 @@ const TransactionSelection = ({
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    flexDirection: 'row',
+    ...FLEX_ROW,
+    padding: spacing[2],
     width: '100%',
     justifyContent: 'space-between',
   },

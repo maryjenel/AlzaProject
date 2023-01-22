@@ -27,10 +27,8 @@ const TransactionScreen = () => {
   const [beforeDate, setBeforeDate] = React.useState(1672540200);
   const [afterDate, setAfterDate] = React.useState(1672549200);
 
-  const {data, isLoading, fetchNextPage, refetch} = useGetTransactions(
-    beforeDate,
-    afterDate,
-  );
+  const {data, isLoading, fetchNextPage, refetch, isFetching} =
+    useGetTransactions(beforeDate, afterDate);
   const transactions =
     data?.pages[0].data.hasMore === false
       ? []
@@ -61,7 +59,7 @@ const TransactionScreen = () => {
       <FlatList
         data={transactions}
         renderItem={renderItem}
-        refreshing={isLoading}
+        refreshing={isLoading || isFetching}
         onEndReached={() => {
           fetchNextPage();
         }}

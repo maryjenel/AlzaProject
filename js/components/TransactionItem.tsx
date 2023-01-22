@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {FLEX_FILL, FLEX_ROW} from '../theme/common';
+import {FontSize, FontWeight} from '../theme/font';
+import {spacing} from '../theme/spacing';
 import {Transaction} from '../types/types';
 import {convertDate, screenWidth} from '../utils/utils';
 
@@ -22,30 +25,29 @@ const TransactionItem = ({item}: {item: Transaction}) => {
 
 const styles = StyleSheet.create({
   titleSection: {
-    fontSize: 15,
+    fontSize: FontSize.M,
     fontWeight: '700',
     width: screenWidth * 0.5,
   },
   firstSection: {
-    marginLeft: 10,
+    marginLeft: spacing[2],
   },
   transactionItemContainer: {
+    ...FLEX_ROW,
+    ...FLEX_FILL,
     width: screenWidth,
-    paddingTop: 10,
-    paddingRight: 10,
-    flex: 1,
-    flexDirection: 'row',
+    paddingTop: spacing[2],
+    paddingRight: spacing[2],
     justifyContent: 'space-between',
   },
   description: {
     width: screenWidth * 0.5,
   },
   rightTextAlight: {textAlign: 'right'},
-  secondSection: {right: 0, paddingLeft: 5, alignSelf: 'flex-end'},
+  secondSection: {paddingLeft: spacing[1], alignSelf: 'flex-end'},
   sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+    marginTop: spacing[2],
+    fontSize: FontSize.L,
   },
   highlight: {
     fontWeight: '700',
