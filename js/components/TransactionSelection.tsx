@@ -9,12 +9,12 @@ const TransactionSelection = ({
   dateInUnixSeconds,
   setDate,
 }: {
-  dateInUnixSeconds: number;
+  dateInUnixSeconds: number | null;
   setDate: Function;
 }) => {
   const [open, setOpen] = React.useState(false);
-
-  const date = new Date(dateInUnixSeconds * 1000);
+  const dateInSeconds = dateInUnixSeconds !== null ? dateInUnixSeconds : 0;
+  const date = new Date(dateInSeconds * 1000);
   return (
     <View style={styles.container}>
       <Text>Transactions</Text>
@@ -22,13 +22,17 @@ const TransactionSelection = ({
         onPress={() => {
           setOpen(true);
         }}>
-        <Text>{convertDate(dateInUnixSeconds)}</Text>
+        <Text>
+          {dateInSeconds > 0 ? convertDate(dateInSeconds) : 'select date'}
+        </Text>
       </TouchableOpacity>
       <DatePicker
         modal
         mode="date"
         open={open}
         date={date}
+        minimumDate={new Date('2021')}
+        maximumDate={new Date()}
         onConfirm={newDate => {
           setOpen(false);
           setDate(convertDateToUnixSeconds(newDate));

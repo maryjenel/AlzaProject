@@ -3,8 +3,12 @@ import {
   FlatList,
   SafeAreaView,
   StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   useColorScheme,
   View,
+  ViewStyle,
 } from 'react-native';
 import _ from 'lodash';
 
@@ -13,6 +17,7 @@ import TransactionItem from '../components/TransactionItem';
 import useGetTransactions from '../queries/useGetTransactions';
 import {Transaction} from '../types/types';
 import TransactionSelection from '../components/TransactionSelection';
+import {spacing} from '../theme/spacing';
 
 const TransactionScreen = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,8 +29,8 @@ const TransactionScreen = () => {
   const renderItem = ({item}: {item: Transaction}) => {
     return <TransactionItem item={item} />;
   };
-  const [beforeDate, setBeforeDate] = React.useState(1672540200);
-  const [afterDate, setAfterDate] = React.useState(1672549200);
+  const [beforeDate, setBeforeDate] = React.useState<number | null>(null);
+  const [afterDate, setAfterDate] = React.useState<number | null>(null);
 
   const {data, isLoading, fetchNextPage, refetch, isFetching} =
     useGetTransactions(beforeDate, afterDate);
@@ -55,6 +60,14 @@ const TransactionScreen = () => {
             refetch();
           }}
         />
+        <TouchableOpacity
+          style={styles.allTransactionsButton}
+          onPress={() => {
+            setBeforeDate(null);
+            setAfterDate(null);
+          }}>
+          <Text>see all transactions</Text>
+        </TouchableOpacity>
       </View>
       <FlatList
         data={transactions}
@@ -67,4 +80,17 @@ const TransactionScreen = () => {
     </SafeAreaView>
   );
 };
+
+interface Styles {
+  allTransactionsButton: ViewStyle;
+}
+
+const styles = StyleSheet.create<Styles>({
+  allTransactionsButton: {
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: spacing[2],
+  },
+});
 export default TransactionScreen;

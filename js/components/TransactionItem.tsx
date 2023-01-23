@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {FLEX_FILL, FLEX_ROW} from '../theme/common';
-import {FontSize, FontWeight} from '../theme/font';
+import {FontSize} from '../theme/font';
 import {spacing} from '../theme/spacing';
 import {Transaction} from '../types/types';
 import {convertDate, screenWidth} from '../utils/utils';

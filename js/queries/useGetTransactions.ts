@@ -2,7 +2,10 @@ import {useInfiniteQuery} from 'react-query';
 import {getTransactions} from '../api/transactions.api';
 import {GET_TRANSACTIONS} from '../utils/constants';
 
-const useGetTransactions = (beforeDate: number, afterDate: number) => {
+const useGetTransactions = (
+  beforeDate: number | null,
+  afterDate: number | null,
+) => {
   return useInfiniteQuery(
     GET_TRANSACTIONS,
     ({pageParam}) => {
